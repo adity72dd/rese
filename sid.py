@@ -8,9 +8,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from config import BOT_TOKEN, ADMIN_IDS, OWNER_USERNAME
 
 USER_FILE = "users.json"
-DEFAULT_THREADS = 200
-DEFAULT_PACKET = 4
-DEFAULT_DURATION = 200  # Set default duration (e.g., 60 seconds)
+DEFAULT_THREADS = 2905
+DEFAULT_PACKET = 37
+DEFAULT_DURATION = 180  # Set default duration (e.g., 60 seconds)
 
 users = {}
 user_processes = {}  # Dictionary to track processes for each user
