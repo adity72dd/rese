@@ -9,8 +9,8 @@ from config import BOT_TOKEN, ADMIN_IDS, OWNER_USERNAME
 
 USER_FILE = "users.json"
 DEFAULT_THREADS = 2000
-DEFAULT_PACKET = 10
-DEFAULT_DURATION = 200  # Set default duration (e.g., 60 seconds)
+DEFAULT_PACKET = 12
+DEFAULT_DURATION = 180  # Set default duration (e.g., 60 seconds)
 
 users = {}
 user_processes = {}  # Dictionary to track processes for each user
