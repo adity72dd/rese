@@ -15,8 +15,8 @@ KEY_FILE = "keys.json"
 flooding_process = None
 flooding_command = None
 
-DEFAULT_THREADS = 1300
-DEFAULT_PACKET = 11
+DEFAULT_THREADS = 2000
+DEFAULT_PACKET = 15
 
 users = {}
 keys = {}
